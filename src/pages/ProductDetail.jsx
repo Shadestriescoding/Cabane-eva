@@ -17,10 +17,10 @@ const ProductDetail = () => {
         category: "macrame",
         price: 89.90,
         images: [
-          "/images/suspension-macrame.jpg",
-          "/images/suspension-macrame-detail1.jpg",
-          "/images/suspension-macrame-detail2.jpg",
-          "/images/suspension-macrame-context.jpg"
+          "/IMG/macrame1.jpg",
+          "/IMG/macrame2.jpg",
+          "/IMG/macrame3.jpg",
+          "/IMG/macrame4.jpg"
         ],
         technique: "Double nœud plat et nœud spirale",
         difficulty: "★★★☆☆",

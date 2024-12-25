@@ -3,14 +3,29 @@
 
 /* Variables */
 :root {
-  /* Nouvelle palette de couleurs plus premium */
-  --color-primary: #2C1810;      /* Marron foncé élégant */
-  --color-secondary: #D4B08C;    /* Beige sophistiqué */
-  --color-accent: #8B7355;       /* Taupe chic */
-  --color-background: #FAF7F2;   /* Blanc cassé raffiné */
-  --color-text: #2C1810;         /* Texte marron foncé */
-  --color-light: #FFFFFF;        /* Blanc pur */
-  --color-muted: #8B7355;        /* Texte secondaire */
+  /* Nouvelle palette de couleurs */
+  --color-primary: #3f4238ff;    /* black-olive */
+  --color-secondary: #6b705cff;  /* reseda-green */
+  --color-accent: #b98b73ff;     /* beaver */
+  --color-background: #ffe8d6ff; /* champagne-pink */
+  --color-text: #3f4238ff;       /* black-olive */
+  --color-light: #ffe8d6ff;      /* champagne-pink */
+  --color-muted: #a5a58dff;      /* sage */
+  
+  /* Couleurs additionnelles */
+  --color-desert-sand: #ddbea9ff;
+  --color-buff: #cb997eff;
+  --color-dun: #d4c7b0ff;
+  --color-ash-gray: #b7b7a4ff;
+  
+  /* Variables pour les dégradés */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-buff));
+  
+  /* Conversions RGB pour les opacités */
+  --primary-rgb: 63, 66, 56;
+  --secondary-rgb: 107, 112, 92;
+  --accent-rgb: 185, 139, 115;
   
   /* Typographie moderne */
   --font-title: 'Cormorant Garamond', serif;
@@ -29,9 +44,19 @@
   --border-radius-lg: 8px;
 
   /* Ombres subtiles */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 8px rgba(63, 66, 56, 0.04);
+  --shadow-md: 0 4px 16px rgba(63, 66, 56, 0.06);
+  --shadow-lg: 0 8px 24px rgba(63, 66, 56, 0.08);
+
+  /* États et feedback */
+  --success: #6b705c;
+  --success-light: rgba(107, 112, 92, 0.1);
+  --error: #b98b73;
+  --error-light: rgba(185, 139, 115, 0.1);
+  
+  /* Bordures */
+  --border-color: var(--color-muted);
+  --border-color-light: var(--color-dun);
 }
 
 /* Reset moderne */
