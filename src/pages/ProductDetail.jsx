@@ -1,44 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { products } from '../data/products';
+import { CartContext } from '../context/CartContext';
+import products from '../data/products';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { addToCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const product = products.find(p => p.id === parseInt(id));
 
   if (!product) {
     return (
-      <div className="container section">
-        <h1>Produit non trouvé</h1>
+      <div className="container section text-center">
+        <h2>Produit non trouvé</h2>
+        <p>Désolé, ce produit n'existe pas.</p>
         <button 
           onClick={() => navigate('/shop')}
           className="btn btn-primary"
+          style={{ marginTop: '1rem' }}
         >
-          Retourner à la boutique
+          Retour à la boutique
         </button>
       </div>
     );
   }
 
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity });
-    // Optionnel : rediriger vers le panier
-    // navigate('/cart');
+    addToCart(product, quantity);
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 3000);
   };
 
   return (
     <div className="container section">
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1fr',
-        gap: '2rem',
-        alignItems: 'start'
-      }}>
+      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
         {/* Image du produit */}
         <div>
           <img
@@ -48,7 +46,7 @@ const ProductDetail = () => {
               width: '100%',
               height: 'auto',
               borderRadius: '8px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
             }}
           />
         </div>
@@ -56,59 +54,111 @@ const ProductDetail = () => {
         {/* Informations du produit */}
         <div>
           <h1>{product.name}</h1>
-          <p className="product-price" style={{ fontSize: '1.5rem' }}>
+          
+          <p style={{ 
+            fontSize: '1.5rem', 
+            color: 'var(--color-brown)',
+            margin: '1rem 0'
+          }}>
             {product.price.toFixed(2)} €
           </p>
-          
+
           <div style={{ margin: '2rem 0' }}>
             <h3>Description</h3>
-            <p>{product.description}</p>
+            <p style={{ lineHeight: '1.8' }}>{product.description}</p>
           </div>
 
-          <div style={{ margin: '2rem 0' }}>
-            <h3>Caractéristiques</h3>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              <li>
-                <strong>Dimensions :</strong> {product.dimensions}
-              </li>
-              <li>
-                <strong>Matériaux :</strong> {product.materials.join(', ')}
-              </li>
-              <li>
-                <strong>Catégorie :</strong> {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-              </li>
-            </ul>
+          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '2rem 0' }}>
+            <div>
+              <h3>Dimensions</h3>
+              <p>{product.dimensions}</p>
+            </div>
+            <div>
+              <h3>Matériaux</h3>
+              <p>{product.materials}</p>
+            </div>
           </div>
 
-          <div style={{ margin: '2rem 0' }}>
-            <label className="form-label">Quantité :</label>
-            <select
-              value={quantity}
-              onChange={(e) => setQuantity(parseInt(e.target.value))}
-              className="input"
-              style={{ width: 'auto', marginRight: '1rem' }}
+          {product.inStock ? (
+            <div>
+              <div className="form-group" style={{ maxWidth: '200px', margin: '2rem 0' }}>
+                <label htmlFor="quantity" className="form-label">Quantité</label>
+                <select
+                  id="quantity"
+                  className="input"
+                  value={quantity}
+                  onChange={(e) => setQuantity(parseInt(e.target.value))}
+                >
+                  {[1, 2, 3, 4, 5].map(num => (
+                    <option key={num} value={num}>{num}</option>
+                  ))}
+                </select>
+              </div>
+
+              <button 
+                onClick={handleAddToCart}
+                className="btn btn-primary"
+                style={{ width: '100%' }}
+                disabled={addedToCart}
+              >
+                {addedToCart ? 'Ajouté au panier !' : 'Ajouter au panier'}
+              </button>
+
+              {addedToCart && (
+                <div 
+                  style={{ 
+                    marginTop: '1rem',
+                    padding: '1rem',
+                    background: 'var(--color-green)',
+                    color: 'white',
+                    borderRadius: '4px',
+                    textAlign: 'center'
+                  }}
+                >
+                  Produit ajouté au panier avec succès !
+                </div>
+              )}
+            </div>
+          ) : (
+            <div 
+              style={{ 
+                padding: '1rem',
+                background: 'var(--color-rust)',
+                color: 'white',
+                borderRadius: '4px',
+                textAlign: 'center'
+              }}
             >
-              {[1, 2, 3, 4, 5].map(num => (
-                <option key={num} value={num}>{num}</option>
-              ))}
-            </select>
+              Ce produit est actuellement en rupture de stock
+            </div>
+          )}
 
-            <button
-              onClick={handleAddToCart}
-              className="btn btn-primary"
-              disabled={!product.inStock}
-            >
-              {product.inStock ? 'Ajouter au panier' : 'Rupture de stock'}
-            </button>
+          {/* Informations supplémentaires */}
+          <div style={{ marginTop: '3rem' }}>
+            <div className="card" style={{ padding: '1.5rem' }}>
+              <h3>Informations importantes</h3>
+              <ul style={{ marginTop: '1rem', lineHeight: '1.8' }}>
+                <li>Création artisanale unique faite à la main</li>
+                <li>Délai de fabrication : 3-5 jours ouvrés</li>
+                <li>Livraison soignée avec emballage protégé</li>
+                <li>Entretien facile (instructions fournies)</li>
+              </ul>
+            </div>
           </div>
 
-          {/* Retour à la boutique */}
-          <button
-            onClick={() => navigate('/shop')}
-            className="btn btn-secondary"
-          >
-            Retourner à la boutique
-          </button>
+          {/* Personnalisation */}
+          <div style={{ marginTop: '2rem' }}>
+            <p>
+              Vous souhaitez une version personnalisée de ce produit ?{' '}
+              <button 
+                onClick={() => navigate('/custom-order')}
+                className="btn btn-secondary"
+                style={{ marginLeft: '0.5rem' }}
+              >
+                Commander sur mesure
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </div>

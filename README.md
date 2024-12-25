@@ -1,46 +1,82 @@
-# La Cabane d'Eva - Site E-commerce
+# La Cabane d'Eva 🌿
 
-Site e-commerce pour La Cabane d'Eva, proposant des créations artisanales en crochet, macramé et origami.
+Site e-commerce de créations artisanales en crochet, macramé et origami.
 
-## Technologies utilisées
+## 🎯 À propos
+
+La Cabane d'Eva est une boutique en ligne proposant des créations artisanales uniques, faites main avec amour. Chaque pièce est soigneusement conçue et réalisée pour apporter une touche d'authenticité et de poésie à votre intérieur.
+
+### Catégories de produits
+
+- 🧶 Crochet : accessoires et décorations
+- 🪢 Macramé : suspensions et décorations murales
+- 📄 Origami : mobiles et décorations
+
+## 🚀 Technologies utilisées
 
 - React
 - React Router
-- Context API pour la gestion du panier
+- Vite
 - CSS personnalisé
+- Context API pour la gestion du panier
 
-## Installation
+## 🛠️ Installation
 
+1. Clonez le dépôt :
 ```bash
-# Cloner le repository
 git clone https://github.com/Shadestriescoding/Cabane-eva.git
+```
 
-# Installer les dépendances
+2. Installez les dépendances :
+```bash
 cd Cabane-eva
 npm install
+```
 
-# Lancer le serveur de développement
+3. Lancez le serveur de développement :
+```bash
 npm run dev
 ```
 
-## Structure du projet
+4. Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
+
+## 📁 Structure du projet
 
 ```
 src/
-  ├── components/     # Composants réutilisables
-  ├── context/       # Context API (panier)
-  ├── data/          # Données statiques
-  ├── pages/         # Pages de l'application
-  └── styles/        # Fichiers CSS
+├── components/     # Composants réutilisables
+├── context/       # Context API pour le panier
+├── data/          # Données des produits
+├── pages/         # Pages de l'application
+├── styles/        # Styles CSS
+└── assets/        # Images et ressources
 ```
 
-## Fonctionnalités
+## 🌟 Fonctionnalités
 
-- Catalogue de produits avec filtres et tri
-- Système de panier
-- Commandes personnalisées
-- Interface administrateur (à venir)
+- ✨ Design moderne et épuré
+- 🛍️ Catalogue de produits filtrable
+- 🛒 Panier d'achat persistant
+- 📝 Formulaire de commande personnalisée
+- 💳 Processus de paiement sécurisé
+- 📱 Design responsive
 
-## Déploiement
+## 🔄 Scripts disponibles
 
-Le site est automatiquement déployé via GitHub Actions lors d'un push sur la branche main. 
+- `npm run dev` : Lance le serveur de développement
+- `npm run build` : Crée une version de production
+- `npm run preview` : Prévisualise la version de production
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
+
+## 📝 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 📧 Contact
+
+Eva - [contact@lacabanedeva.fr](mailto:contact@lacabanedeva.fr)
+
+Site web : [https://lacabanedeva.fr](https://lacabanedeva.fr) 
