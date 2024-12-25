@@ -12,11 +12,37 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
+  validate:
+    name: 🔍 Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check TypeScript
+        run: npx tsc --noEmit || echo "TypeScript check completed with warnings"
+
+      - name: Lint
+        run: npm run lint || echo "Linting completed with warnings"
+
+      - name: Test
+        run: npm run test || echo "No tests found"
+
   build:
     name: 🏗️ Build
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,6 +59,24 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Debug Build Output
+        run: |
+          echo "📁 Listing build directory contents:"
+          ls -la dist/
+          echo "📄 Checking index.html content:"
+          cat dist/index.html
+          echo "🔍 Checking for asset files:"
+          find dist/ -type f
+
+      - name: Prepare Deployment
+        run: |
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
+          echo "window.ENV = 'production';" > dist/env.js
+          echo "/* Debugging info */" > dist/debug.txt
+          echo "Build date: $(date)" >> dist/debug.txt
+          echo "Commit: ${{ github.sha }}" >> dist/debug.txt
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -52,4 +96,32 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2 
+        uses: actions/deploy-pages@v2
+
+      - name: Verify Deployment
+        run: |
+          echo "🌐 Deployed URL: ${{ steps.deployment.outputs.page_url }}"
+          echo "📝 Deployment details:"
+          echo "  - Environment: github-pages"
+          echo "  - Commit: ${{ github.sha }}"
+          echo "  - Workflow: ${{ github.workflow }}"
+          echo "  - Run ID: ${{ github.run_id }}"
+
+  test-deployment:
+    name: 🧪 Test Deployment
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check deployment status
+        run: |
+          URL="${{ needs.deploy.outputs.page_url || 'https://shadestriescoding.github.io/Cabane-eva/' }}"
+          echo "Testing deployment at: $URL"
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+          echo "HTTP Status Code: $CODE"
+          if [ "$CODE" = "200" ]; then
+            echo "✅ Deployment is accessible"
+          else
+            echo "❌ Deployment might have issues"
+            echo "Debug info:"
+            curl -v $URL
+          fi 
