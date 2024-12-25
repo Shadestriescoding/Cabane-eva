@@ -1,127 +1,206 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import products from '../data/products';
 
 const Home = () => {
-  // Sélectionner quelques produits pour la page d'accueil
-  const featuredProducts = products.slice(0, 3);
-
   return (
-    <div className="container section">
+    <div className="home-container">
       {/* Hero Section */}
-      <div className="text-center" style={{ marginBottom: '4rem' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>La Cabane d'Eva</h1>
-        <p style={{ 
-          fontSize: '1.2rem', 
-          maxWidth: '600px', 
-          margin: '0 auto 2rem',
-          color: 'var(--color-brown-light)'
-        }}>
-          Créations artisanales uniques en crochet, macramé et origami
-        </p>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-          <Link to="/shop" className="btn btn-primary">
-            Découvrir la boutique
-          </Link>
-          <Link to="/custom-order" className="btn btn-secondary">
-            Commander sur mesure
-          </Link>
+      <section className="hero">
+        <div className="hero-content fade-in">
+          <span className="pre-title">Artisanat d'exception</span>
+          <h1>La Cabane d'Eva</h1>
+          <p className="hero-subtitle">Créations artisanales uniques en crochet, macramé et origami</p>
+          <div className="hero-buttons">
+            <Link to="/boutique" className="button button-primary">Explorer la collection</Link>
+            <Link to="/sur-mesure" className="button button-secondary">Création sur mesure</Link>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Introduction */}
+      <section className="intro container fade-in">
+        <div className="intro-content">
+          <span className="section-tag">Notre Savoir-faire</span>
+          <h2>L'art de la création artisanale</h2>
+          <p className="intro-text">Chaque pièce est créée à la main avec passion et minutie, utilisant des matériaux soigneusement sélectionnés pour leur qualité et leur authenticité.</p>
+        </div>
+      </section>
 
       {/* Catégories */}
-      <div style={{ marginBottom: '4rem' }}>
-        <h2 className="text-center" style={{ marginBottom: '2rem' }}>Nos Créations</h2>
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h3>Crochet</h3>
-            <p style={{ margin: '1rem 0' }}>
-              Des accessoires et décorations en crochet, réalisés avec des matériaux de qualité
-              pour un rendu unique et chaleureux.
-            </p>
-            <Link to="/shop?category=crochet" className="btn btn-secondary">
-              Voir les créations
-            </Link>
+      <section className="categories container">
+        <div className="categories-header fade-in">
+          <span className="section-tag">Nos Spécialités</span>
+          <h2>Découvrez nos créations</h2>
+        </div>
+        <div className="categories-grid">
+          <div className="category-card fade-in">
+            <div className="category-image">
+              <img src="/images/category-crochet.jpg" alt="Créations en crochet" />
+            </div>
+            <div className="category-content">
+              <h3>Crochet</h3>
+              <p>Des accessoires et décorations en crochet, réalisés avec des matériaux nobles pour un rendu unique et chaleureux.</p>
+              <Link to="/boutique?category=crochet" className="button button-secondary">Découvrir</Link>
+            </div>
           </div>
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h3>Macramé</h3>
-            <p style={{ margin: '1rem 0' }}>
-              Des suspensions et décorations murales en macramé pour apporter une touche
-              bohème à votre intérieur.
-            </p>
-            <Link to="/shop?category=macrame" className="btn btn-secondary">
-              Voir les créations
-            </Link>
+          <div className="category-card fade-in">
+            <div className="category-image">
+              <img src="/images/category-macrame.jpg" alt="Créations en macramé" />
+            </div>
+            <div className="category-content">
+              <h3>Macramé</h3>
+              <p>Des suspensions et décorations murales en macramé pour une touche bohème raffinée dans votre intérieur.</p>
+              <Link to="/boutique?category=macrame" className="button button-secondary">Découvrir</Link>
+            </div>
           </div>
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h3>Origami</h3>
-            <p style={{ margin: '1rem 0' }}>
-              Des mobiles et décorations en origami pour une ambiance poétique et délicate
-              dans votre maison.
-            </p>
-            <Link to="/shop?category=origami" className="btn btn-secondary">
-              Voir les créations
-            </Link>
+          <div className="category-card fade-in">
+            <div className="category-image">
+              <img src="/images/category-origami.jpg" alt="Créations en origami" />
+            </div>
+            <div className="category-content">
+              <h3>Origami</h3>
+              <p>Des mobiles et décorations en origami pour une ambiance poétique et délicate dans votre espace.</p>
+              <Link to="/boutique?category=origami" className="button button-secondary">Découvrir</Link>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Produits mis en avant */}
-      <div>
-        <h2 className="text-center" style={{ marginBottom: '2rem' }}>Nos Dernières Créations</h2>
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
-          {featuredProducts.map(product => (
-            <Link 
-              key={product.id}
-              to={`/product/${product.id}`}
-              className="card"
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                style={{
-                  width: '100%',
-                  height: '250px',
-                  objectFit: 'cover',
-                  borderRadius: '8px 8px 0 0'
-                }}
-              />
-              <div style={{ padding: '1rem' }}>
-                <h3>{product.name}</h3>
-                <p style={{ 
-                  color: 'var(--color-brown)',
-                  fontSize: '1.2rem',
-                  fontWeight: 'bold',
-                  marginTop: '0.5rem'
-                }}>
-                  {product.price.toFixed(2)} €
-                </p>
+      {/* Dernières Créations */}
+      <section className="latest-products">
+        <div className="container">
+          <div className="products-header fade-in">
+            <span className="section-tag">Nouveautés</span>
+            <h2>Nos dernières créations</h2>
+          </div>
+          <div className="products-grid">
+            <article className="product-card fade-in" data-category="macrame">
+              <span className="handmade-badge">Fait main</span>
+              <span className="making-time">~4h de création</span>
+              <div className="product-image-container zoom-container">
+                <img src="/images/suspension-macrame.jpg" alt="Suspension Macramé Bohème" className="product-image" />
+                <div className="product-overlay">
+                  <Link to="/produit/suspension-macrame" className="button button-primary">Voir le produit</Link>
+                </div>
+                <div className="detail-zoom"></div>
               </div>
-            </Link>
-          ))}
-        </div>
-        <div className="text-center" style={{ marginTop: '2rem' }}>
-          <Link to="/shop" className="btn btn-primary">
-            Voir toute la collection
-          </Link>
-        </div>
-      </div>
+              <div className="technique-info">
+                Technique : Double nœud plat et nœud spirale
+                <br />
+                Difficulté : ★★★☆☆
+              </div>
+              <div className="product-info">
+                <span className="product-category">
+                  <i className="category-icon">🪢</i>
+                  Macramé
+                </span>
+                <h3>Suspension Macramé Bohème</h3>
+                <div className="materials-tags">
+                  <span className="materials-tag">Coton naturel</span>
+                  <span className="materials-tag">Bois flotté</span>
+                </div>
+                <p className="price">89.90 €</p>
+                <p className="product-details">Suspension murale en macramé, réalisée à la main avec du coton naturel et du bois flotté. Parfaite pour un style bohème chic.</p>
+              </div>
+            </article>
 
-      {/* Section À propos */}
-      <div style={{ marginTop: '4rem' }}>
-        <div className="card" style={{ padding: '2rem', textAlign: 'center' }}>
-          <h2>À Propos de La Cabane d'Eva</h2>
-          <p style={{ maxWidth: '800px', margin: '1rem auto' }}>
-            Passionnée par l'artisanat depuis toujours, je crée des pièces uniques
-            entièrement faites main. Chaque création est pensée et réalisée avec soin,
-            pour apporter une touche d'authenticité à votre intérieur.
-          </p>
-          <Link to="/about" className="btn btn-secondary" style={{ marginTop: '1rem' }}>
-            En savoir plus
-          </Link>
+            <article className="product-card fade-in" data-category="origami">
+              <span className="handmade-badge">Fait main</span>
+              <span className="making-time">~2h de pliage</span>
+              <div className="product-image-container zoom-container">
+                <img src="/images/mobile-origami.jpg" alt="Mobile Origami Oiseaux" className="product-image" />
+                <div className="product-overlay">
+                  <Link to="/produit/mobile-origami" className="button button-primary">Voir le produit</Link>
+                </div>
+                <div className="detail-zoom"></div>
+              </div>
+              <div className="technique-info">
+                Technique : Pliage traditionnel Orizuru
+                <br />
+                Difficulté : ★★★★☆
+              </div>
+              <div className="product-info">
+                <span className="product-category">
+                  <i className="category-icon">🎋</i>
+                  Origami
+                </span>
+                <h3>Mobile Origami Oiseaux</h3>
+                <div className="materials-tags">
+                  <span className="materials-tag">Papier washi</span>
+                  <span className="materials-tag">Bambou</span>
+                </div>
+                <p className="price">45.90 €</p>
+                <p className="product-details">Mobile décoratif composé de grues en origami, symboles de paix et de bonheur. Papier washi traditionnel importé du Japon.</p>
+              </div>
+            </article>
+
+            <article className="product-card fade-in" data-category="crochet">
+              <span className="handmade-badge">Fait main</span>
+              <span className="making-time">~15h de crochet</span>
+              <div className="product-image-container zoom-container">
+                <img src="/images/couverture-crochet.jpg" alt="Couverture Crochet Automne" className="product-image" />
+                <div className="product-overlay">
+                  <Link to="/produit/couverture-crochet" className="button button-primary">Voir le produit</Link>
+                </div>
+                <div className="detail-zoom"></div>
+              </div>
+              <div className="technique-info">
+                Points utilisés : Bride, point écaille
+                <br />
+                Difficulté : ★★★★★
+              </div>
+              <div className="product-info">
+                <span className="product-category">
+                  <i className="category-icon">🧶</i>
+                  Crochet
+                </span>
+                <h3>Couverture Crochet Automne</h3>
+                <div className="materials-tags">
+                  <span className="materials-tag">Laine mérinos</span>
+                  <span className="materials-tag">Mohair</span>
+                </div>
+                <p className="price">129.90 €</p>
+                <p className="product-details">Couverture douillette réalisée en points fantaisie, mêlant laine mérinos et mohair pour une douceur incomparable. Parfaite pour les soirées d'automne.</p>
+              </div>
+            </article>
+          </div>
+          <div className="text-center fade-in">
+            <Link to="/boutique" className="button button-secondary">Découvrir toute la collection</Link>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* À Propos */}
+      <section className="about">
+        <div className="container">
+          <div className="about-grid">
+            <div className="about-image fade-in">
+              <img src="/images/atelier.jpg" alt="Notre atelier" />
+            </div>
+            <div className="about-content fade-in">
+              <span className="section-tag">Notre Histoire</span>
+              <h2>À Propos de La Cabane d'Eva</h2>
+              <p>Passionnée par l'artisanat depuis toujours, je crée des pièces uniques entièrement faites main. Chaque création est pensée et réalisée avec soin, pour apporter une touche d'authenticité à votre intérieur.</p>
+              <Link to="/a-propos" className="button button-secondary">En savoir plus</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="newsletter">
+        <div className="container">
+          <div className="newsletter-content fade-in">
+            <span className="section-tag">Restez informé</span>
+            <h2>Inscrivez-vous à notre newsletter</h2>
+            <p>Recevez en avant-première nos nouvelles créations et inspirations</p>
+            <form className="newsletter-form">
+              <input type="email" placeholder="Votre adresse email" className="newsletter-input" />
+              <button type="submit" className="button button-primary">S'inscrire</button>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

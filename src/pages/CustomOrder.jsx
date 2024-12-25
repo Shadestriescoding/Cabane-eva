@@ -2,250 +2,248 @@ import React, { useState } from 'react';
 
 const CustomOrder = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
     category: '',
+    description: '',
     dimensions: '',
     colors: '',
     budget: '',
-    deadline: '',
-    description: '',
-    reference_images: null
+    timeline: '',
+    name: '',
+    email: '',
+    phone: '',
+    additionalInfo: ''
   });
-  const [submitted, setSubmitted] = useState(false);
-
-  const categories = [
-    'Crochet - Accessoire',
-    'Crochet - Décoration',
-    'Macramé - Suspension',
-    'Macramé - Décoration Murale',
-    'Origami - Mobile',
-    'Origami - Décoration',
-    'Autre'
-  ];
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === 'reference_images') {
-      setFormData(prev => ({
-        ...prev,
-        [name]: files[0]
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-    }
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ici, vous pourriez ajouter l'envoi à une API
-    console.log('Demande de création personnalisée:', formData);
-    setSubmitted(true);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      category: '',
-      dimensions: '',
-      colors: '',
-      budget: '',
-      deadline: '',
-      description: '',
-      reference_images: null
-    });
+    // Logique d'envoi du formulaire à implémenter
+    console.log('Formulaire soumis:', formData);
   };
 
   return (
-    <div className="container section">
-      <div className="text-center" style={{ marginBottom: '3rem' }}>
-        <h1>Création Sur Mesure</h1>
-        <p style={{ maxWidth: '600px', margin: '1rem auto' }}>
-          Vous avez un projet spécifique en tête ? Je serai ravie de créer une pièce unique
-          qui correspond exactement à vos envies.
-        </p>
-      </div>
-
-      {/* Processus de commande */}
-      <div style={{ marginBottom: '4rem' }}>
-        <h2 className="text-center" style={{ marginBottom: '2rem' }}>Comment ça marche ?</h2>
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem' }}>
-          <div className="card text-center">
-            <h3>1. Demande</h3>
-            <p>Remplissez le formulaire avec vos souhaits et inspirations.</p>
-          </div>
-          <div className="card text-center">
-            <h3>2. Échange</h3>
-            <p>Je vous contacte pour affiner les détails de votre projet.</p>
-          </div>
-          <div className="card text-center">
-            <h3>3. Devis</h3>
-            <p>Je vous envoie un devis détaillé et un planning de réalisation.</p>
-          </div>
-          <div className="card text-center">
-            <h3>4. Création</h3>
-            <p>Une fois le devis validé, je commence la création de votre pièce.</p>
-          </div>
+    <div className="custom-order-container">
+      <section className="custom-order-hero">
+        <div className="container">
+          <h1 className="fade-in">Création Sur Mesure</h1>
+          <p className="custom-order-subtitle fade-in">
+            Faites réaliser une pièce unique selon vos envies
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Formulaire de commande */}
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        {submitted ? (
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h2>Demande Envoyée !</h2>
-            <p>
-              Merci pour votre demande de création personnalisée. Je vous contacterai
-              dans les 48h pour discuter de votre projet en détail.
-            </p>
-            <button 
-              onClick={() => setSubmitted(false)}
-              className="btn btn-primary"
-              style={{ marginTop: '1rem' }}
-            >
-              Faire une nouvelle demande
-            </button>
+      <div className="container">
+        <div className="custom-order-grid">
+          {/* Informations */}
+          <div className="custom-order-info fade-in">
+            <div className="info-card">
+              <h2>Comment ça marche ?</h2>
+              <ol className="process-list">
+                <li>
+                  <span className="step-number">1</span>
+                  <div className="step-content">
+                    <h3>Décrivez votre projet</h3>
+                    <p>Partagez vos idées, inspirations et contraintes techniques</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="step-number">2</span>
+                  <div className="step-content">
+                    <h3>Devis personnalisé</h3>
+                    <p>Je vous envoie une proposition détaillée sous 48h</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="step-number">3</span>
+                  <div className="step-content">
+                    <h3>Création artisanale</h3>
+                    <p>Votre pièce est réalisée avec soin selon vos spécifications</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="step-number">4</span>
+                  <div className="step-content">
+                    <h3>Livraison soignée</h3>
+                    <p>Votre création est emballée et expédiée avec le plus grand soin</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div className="guarantees-card">
+              <h2>Nos Garanties</h2>
+              <ul className="guarantees-list">
+                <li>
+                  <i className="guarantee-icon">✨</i>
+                  <div className="guarantee-content">
+                    <h3>Pièce Unique</h3>
+                    <p>Création exclusive réalisée spécialement pour vous</p>
+                  </div>
+                </li>
+                <li>
+                  <i className="guarantee-icon">🤝</i>
+                  <div className="guarantee-content">
+                    <h3>Accompagnement</h3>
+                    <p>Échanges réguliers tout au long du processus</p>
+                  </div>
+                </li>
+                <li>
+                  <i className="guarantee-icon">⭐</i>
+                  <div className="guarantee-content">
+                    <h3>Satisfaction</h3>
+                    <p>Modifications possibles jusqu'à votre entière satisfaction</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="card" style={{ padding: '2rem' }}>
-            {/* Informations personnelles */}
-            <h3 style={{ marginBottom: '1.5rem' }}>Vos Informations</h3>
-            <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-              <div className="form-group">
-                <label htmlFor="name" className="form-label">Nom</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="input"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="input"
-                  required
-                />
-              </div>
-            </div>
 
-            {/* Détails du projet */}
-            <h3 style={{ marginBottom: '1.5rem' }}>Détails de votre Projet</h3>
-            <div className="form-group">
-              <label htmlFor="category" className="form-label">Type de Création</label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="input"
-                required
-              >
-                <option value="">Sélectionnez une catégorie</option>
-                {categories.map(cat => (
-                  <option key={cat} value={cat}>{cat}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          {/* Formulaire */}
+          <form className="custom-order-form fade-in" onSubmit={handleSubmit}>
+            <div className="form-section">
+              <h2>Votre Projet</h2>
+              
               <div className="form-group">
-                <label htmlFor="dimensions" className="form-label">Dimensions Souhaitées</label>
+                <label htmlFor="category">Type de création</label>
+                <select
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Sélectionnez une catégorie</option>
+                  <option value="macrame">Macramé</option>
+                  <option value="crochet">Crochet</option>
+                  <option value="origami">Origami</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="description">Description du projet</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Décrivez votre projet en détail..."
+                  required
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="dimensions">Dimensions souhaitées</label>
                 <input
                   type="text"
                   id="dimensions"
                   name="dimensions"
                   value={formData.dimensions}
                   onChange={handleChange}
-                  className="input"
-                  placeholder="ex: 50cm x 30cm"
+                  placeholder="Ex: 50cm x 70cm"
                 />
               </div>
+
               <div className="form-group">
-                <label htmlFor="colors" className="form-label">Couleurs Désirées</label>
+                <label htmlFor="colors">Couleurs désirées</label>
                 <input
                   type="text"
                   id="colors"
                   name="colors"
                   value={formData.colors}
                   onChange={handleChange}
-                  className="input"
-                  placeholder="ex: tons beiges et bruns"
+                  placeholder="Ex: tons naturels, beige, blanc cassé..."
                 />
               </div>
-            </div>
 
-            <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <div className="form-group">
-                <label htmlFor="budget" className="form-label">Budget Approximatif</label>
+                <label htmlFor="budget">Budget approximatif</label>
                 <input
                   type="text"
                   id="budget"
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
-                  className="input"
-                  placeholder="ex: 100-150€"
+                  placeholder="Votre budget en euros"
                 />
               </div>
+
               <div className="form-group">
-                <label htmlFor="deadline" className="form-label">Date Souhaitée</label>
+                <label htmlFor="timeline">Délai souhaité</label>
                 <input
-                  type="date"
-                  id="deadline"
-                  name="deadline"
-                  value={formData.deadline}
+                  type="text"
+                  id="timeline"
+                  name="timeline"
+                  value={formData.timeline}
                   onChange={handleChange}
-                  className="input"
+                  placeholder="Dans combien de temps souhaitez-vous recevoir votre création ?"
                 />
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="description" className="form-label">Description Détaillée</label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className="input"
-                style={{ minHeight: '150px' }}
-                placeholder="Décrivez votre projet en détail : style, utilisation prévue, inspirations..."
-                required
-              />
+            <div className="form-section">
+              <h2>Vos Coordonnées</h2>
+              
+              <div className="form-group">
+                <label htmlFor="name">Nom complet</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">Téléphone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="additionalInfo">Informations complémentaires</label>
+                <textarea
+                  id="additionalInfo"
+                  name="additionalInfo"
+                  value={formData.additionalInfo}
+                  onChange={handleChange}
+                  placeholder="Toute autre information utile pour votre projet..."
+                  rows="3"
+                ></textarea>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="reference_images" className="form-label">Images de Référence</label>
-              <input
-                type="file"
-                id="reference_images"
-                name="reference_images"
-                onChange={handleChange}
-                className="input"
-                accept="image/*"
-              />
-              <small style={{ display: 'block', marginTop: '0.5rem', color: 'var(--color-brown)' }}>
-                Vous pouvez ajouter une image d'inspiration (optionnel)
-              </small>
-            </div>
-
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
+            <button type="submit" className="button button-primary submit-btn">
               Envoyer ma demande
             </button>
           </form>
-        )}
+        </div>
       </div>
     </div>
   );

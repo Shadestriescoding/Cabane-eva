@@ -2,105 +2,154 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="container section">
-      <div className="text-center" style={{ marginBottom: '3rem' }}>
-        <h1>À Propos</h1>
-        <p style={{ maxWidth: '600px', margin: '1rem auto' }}>
-          Découvrez l'histoire de La Cabane d'Eva et ma passion pour l'artisanat
-        </p>
-      </div>
-
-      {/* Histoire et Présentation */}
-      <div style={{ maxWidth: '800px', margin: '0 auto 4rem' }}>
-        <div className="card" style={{ padding: '2rem', marginBottom: '2rem' }}>
-          <h2>Mon Histoire</h2>
-          <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-            Bonjour, je suis Eva ! Depuis mon plus jeune âge, j'ai toujours été fascinée par 
-            l'art de créer de mes mains. Cette passion m'a naturellement conduite à explorer 
-            différentes techniques artisanales, en commençant par le crochet, que ma grand-mère 
-            m'a enseigné quand j'étais petite.
-          </p>
-          <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-            Au fil des années, j'ai élargi mon horizon créatif en découvrant le macramé et 
-            l'origami. Chaque technique m'apporte quelque chose d'unique : la douceur et le 
-            confort du crochet, l'élégance et la texture du macramé, la précision et la poésie 
-            de l'origami.
+    <div className="about-page-container">
+      <section className="about-hero">
+        <div className="container">
+          <h1 className="fade-in">À Propos de La Cabane d'Eva</h1>
+          <p className="about-subtitle fade-in">
+            L'histoire d'une passion pour l'artisanat et la création
           </p>
         </div>
+      </section>
 
-        <div className="card" style={{ padding: '2rem' }}>
-          <h2>Ma Philosophie</h2>
-          <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-            Je crois profondément en la valeur des objets faits main. Chaque pièce que je crée 
-            est unique et porte en elle une histoire, du temps, et beaucoup d'amour. Je choisis 
-            méticuleusement mes matériaux pour leur qualité et leur durabilité, privilégiant 
-            autant que possible des sources éco-responsables.
-          </p>
-          <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-            La Cabane d'Eva est née de mon désir de partager cette passion et de créer des 
-            pièces uniques qui apportent chaleur et personnalité à votre intérieur. Chaque 
-            création est pensée et réalisée avec soin, dans mon atelier parisien.
-          </p>
-        </div>
-      </div>
+      <div className="container">
+        {/* Histoire */}
+        <section className="about-section fade-in">
+          <div className="about-content">
+            <div className="about-text">
+              <span className="section-tag">Notre Histoire</span>
+              <h2>Une passion née de l'amour du fait main</h2>
+              <p>
+                La Cabane d'Eva est née d'une passion profonde pour l'artisanat traditionnel et 
+                le travail minutieux des matières nobles. Depuis mon plus jeune âge, j'ai toujours 
+                été fascinée par la création manuelle, les textures et les possibilités infinies 
+                qu'offrent le macramé, le crochet et l'origami.
+              </p>
+              <p>
+                Après des années de pratique et de perfectionnement, j'ai décidé de partager 
+                cette passion en créant des pièces uniques qui racontent chacune leur propre 
+                histoire. Chaque création est pensée et réalisée avec amour dans mon atelier, 
+                en respectant les techniques traditionnelles tout en y apportant une touche 
+                contemporaine.
+              </p>
+            </div>
+            <div className="about-image">
+              <img src="/images/atelier-detail.jpg" alt="L'atelier de création" />
+            </div>
+          </div>
+        </section>
 
-      {/* Valeurs et Engagements */}
-      <div style={{ marginBottom: '4rem' }}>
-        <h2 className="text-center" style={{ marginBottom: '2rem' }}>Mes Valeurs</h2>
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h3>Artisanat Authentique</h3>
-            <p style={{ marginTop: '1rem' }}>
-              Chaque pièce est entièrement réalisée à la main, avec attention et passion, 
-              garantissant un produit unique et de qualité.
-            </p>
+        {/* Valeurs */}
+        <section className="values-section fade-in">
+          <span className="section-tag">Nos Valeurs</span>
+          <h2>Ce qui nous anime au quotidien</h2>
+          <div className="values-grid">
+            <div className="value-card">
+              <i className="value-icon">🌿</i>
+              <h3>Authenticité</h3>
+              <p>
+                Chaque pièce est unique et reflète l'authenticité du travail artisanal. 
+                Nous privilégions les matériaux naturels et les techniques traditionnelles.
+              </p>
+            </div>
+            <div className="value-card">
+              <i className="value-icon">💝</i>
+              <h3>Passion</h3>
+              <p>
+                La passion guide chacun de nos gestes, de la sélection des matériaux à 
+                la finition minutieuse de chaque création.
+              </p>
+            </div>
+            <div className="value-card">
+              <i className="value-icon">🤝</i>
+              <h3>Proximité</h3>
+              <p>
+                Nous créons des liens privilégiés avec nos clients, en étant à l'écoute 
+                de leurs souhaits et en les accompagnant dans leurs projets.
+              </p>
+            </div>
+            <div className="value-card">
+              <i className="value-icon">✨</i>
+              <h3>Excellence</h3>
+              <p>
+                La qualité est au cœur de notre démarche, avec une attention particulière 
+                portée aux détails et à la durabilité de nos créations.
+              </p>
+            </div>
           </div>
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h3>Éco-responsabilité</h3>
-            <p style={{ marginTop: '1rem' }}>
-              Je sélectionne des matériaux durables et respectueux de l'environnement, 
-              privilégiant les circuits courts et les emballages écologiques.
-            </p>
-          </div>
-          <div className="card text-center" style={{ padding: '2rem' }}>
-            <h3>Sur Mesure</h3>
-            <p style={{ marginTop: '1rem' }}>
-              Je crée des pièces personnalisées adaptées à vos envies et à votre intérieur, 
-              pour des créations vraiment uniques.
-            </p>
-          </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Techniques et Savoir-faire */}
-      <div>
-        <h2 className="text-center" style={{ marginBottom: '2rem' }}>Mes Techniques</h2>
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
-          <div className="card" style={{ padding: '2rem' }}>
-            <h3>Crochet</h3>
-            <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-              Le crochet permet de créer des pièces douces et confortables, parfaites pour 
-              les accessoires et la décoration d'intérieur. Je travaille avec des fils de 
-              qualité pour garantir la durabilité de mes créations.
-            </p>
+        {/* Processus de création */}
+        <section className="process-section fade-in">
+          <span className="section-tag">Notre Savoir-faire</span>
+          <h2>Le processus de création</h2>
+          <div className="process-timeline">
+            <div className="timeline-item">
+              <div className="timeline-content">
+                <span className="timeline-number">01</span>
+                <h3>Inspiration</h3>
+                <p>
+                  Chaque création commence par une phase d'inspiration, nourrie par la nature, 
+                  l'art et les tendances contemporaines.
+                </p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-content">
+                <span className="timeline-number">02</span>
+                <h3>Sélection des matériaux</h3>
+                <p>
+                  Nous choisissons méticuleusement des matériaux de qualité, en privilégiant 
+                  les fibres naturelles et les matières durables.
+                </p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-content">
+                <span className="timeline-number">03</span>
+                <h3>Création artisanale</h3>
+                <p>
+                  Chaque pièce est réalisée à la main, avec patience et précision, en 
+                  respectant les techniques traditionnelles.
+                </p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-content">
+                <span className="timeline-number">04</span>
+                <h3>Contrôle qualité</h3>
+                <p>
+                  Une attention particulière est portée aux finitions et à la qualité 
+                  globale de chaque création avant l'envoi.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="card" style={{ padding: '2rem' }}>
-            <h3>Macramé</h3>
-            <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-              Art ancestral des nœuds, le macramé apporte texture et élégance à la décoration. 
-              Je crée principalement des suspensions et des décorations murales dans un style 
-              bohème et naturel.
-            </p>
+        </section>
+
+        {/* Engagement */}
+        <section className="engagement-section fade-in">
+          <div className="engagement-content">
+            <div className="engagement-text">
+              <span className="section-tag">Notre Engagement</span>
+              <h2>Un artisanat responsable</h2>
+              <p>
+                Nous nous engageons à créer des pièces durables et respectueuses de 
+                l'environnement. Chaque création est pensée pour traverser le temps et 
+                s'inscrire dans une démarche de consommation responsable.
+              </p>
+              <ul className="engagement-list">
+                <li>Matériaux naturels et écologiques</li>
+                <li>Emballages recyclables</li>
+                <li>Production locale et artisanale</li>
+                <li>Pièces durables et intemporelles</li>
+              </ul>
+            </div>
+            <div className="engagement-image">
+              <img src="/images/materiaux.jpg" alt="Nos matériaux naturels" />
+            </div>
           </div>
-          <div className="card" style={{ padding: '2rem' }}>
-            <h3>Origami</h3>
-            <p style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-              L'art du pliage japonais me permet de créer des pièces délicates et poétiques. 
-              Je réalise des mobiles et des décorations murales qui apportent légèreté et 
-              originalité à votre intérieur.
-            </p>
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   );

@@ -1,163 +1,219 @@
-import React, { useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { CartContext } from '../context/CartContext';
-import products from '../data/products';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { addToCart } = useContext(CartContext);
+  const [product, setProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
 
-  const product = products.find(p => p.id === parseInt(id));
+  // Simulation de récupération des données produit
+  useEffect(() => {
+    const fetchProduct = () => {
+      // Simuler une requête API
+      const productData = {
+        id: parseInt(id),
+        name: "Suspension Macramé Bohème",
+        category: "macrame",
+        price: 89.90,
+        images: [
+          "/images/suspension-macrame.jpg",
+          "/images/suspension-macrame-detail1.jpg",
+          "/images/suspension-macrame-detail2.jpg",
+          "/images/suspension-macrame-context.jpg"
+        ],
+        technique: "Double nœud plat et nœud spirale",
+        difficulty: "★★★☆☆",
+        makingTime: "~4h de création",
+        materials: ["Coton naturel", "Bois flotté"],
+        description: "Suspension murale en macramé, réalisée à la main avec du coton naturel et du bois flotté. Parfaite pour un style bohème chic.",
+        dimensions: {
+          height: "80 cm",
+          width: "60 cm",
+          depth: "5 cm"
+        },
+        care: "Dépoussiérer délicatement. Éviter l'exposition directe au soleil.",
+        inStock: true,
+        creationProcess: [
+          "Sélection et préparation des matériaux",
+          "Création de la structure de base",
+          "Réalisation des nœuds décoratifs",
+          "Finitions et contrôle qualité"
+        ],
+        shipping: {
+          time: "2-3 jours ouvrés",
+          method: "Colissimo avec suivi",
+          price: 6.90
+        }
+      };
+      setProduct(productData);
+      setSelectedImage(0);
+    };
+
+    fetchProduct();
+  }, [id]);
 
   if (!product) {
     return (
-      <div className="container section text-center">
-        <h2>Produit non trouvé</h2>
-        <p>Désolé, ce produit n'existe pas.</p>
-        <button 
-          onClick={() => navigate('/shop')}
-          className="btn btn-primary"
-          style={{ marginTop: '1rem' }}
-        >
-          Retour à la boutique
-        </button>
+      <div className="container">
+        <div className="loading">Chargement...</div>
       </div>
     );
   }
 
-  const handleAddToCart = () => {
-    addToCart(product, quantity);
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 3000);
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value > 0 && value <= 10) {
+      setQuantity(value);
+    }
+  };
+
+  const addToCart = () => {
+    // Logique d'ajout au panier à implémenter
+    console.log(`Ajout de ${quantity} ${product.name} au panier`);
   };
 
   return (
-    <div className="container section">
-      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
-        {/* Image du produit */}
-        <div>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{
-              width: '100%',
-              height: 'auto',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-            }}
-          />
-        </div>
+    <div className="product-detail-container">
+      <div className="container">
+        {/* Fil d'Ariane */}
+        <nav className="breadcrumb fade-in">
+          <Link to="/">Accueil</Link>
+          <span className="separator">/</span>
+          <Link to="/boutique">Boutique</Link>
+          <span className="separator">/</span>
+          <span className="current">{product.name}</span>
+        </nav>
 
-        {/* Informations du produit */}
-        <div>
-          <h1>{product.name}</h1>
-          
-          <p style={{ 
-            fontSize: '1.5rem', 
-            color: 'var(--color-brown)',
-            margin: '1rem 0'
-          }}>
-            {product.price.toFixed(2)} €
-          </p>
-
-          <div style={{ margin: '2rem 0' }}>
-            <h3>Description</h3>
-            <p style={{ lineHeight: '1.8' }}>{product.description}</p>
-          </div>
-
-          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '2rem 0' }}>
-            <div>
-              <h3>Dimensions</h3>
-              <p>{product.dimensions}</p>
+        <div className="product-detail-grid">
+          {/* Galerie d'images */}
+          <div className="product-gallery fade-in">
+            <div className="main-image-container">
+              <img 
+                src={product.images[selectedImage]} 
+                alt={product.name} 
+                className="main-image"
+              />
+              <span className="handmade-badge">Fait main</span>
             </div>
-            <div>
-              <h3>Matériaux</h3>
-              <p>{product.materials}</p>
-            </div>
-          </div>
-
-          {product.inStock ? (
-            <div>
-              <div className="form-group" style={{ maxWidth: '200px', margin: '2rem 0' }}>
-                <label htmlFor="quantity" className="form-label">Quantité</label>
-                <select
-                  id="quantity"
-                  className="input"
-                  value={quantity}
-                  onChange={(e) => setQuantity(parseInt(e.target.value))}
+            <div className="thumbnail-grid">
+              {product.images.map((image, index) => (
+                <button
+                  key={index}
+                  className={`thumbnail-button ${selectedImage === index ? 'active' : ''}`}
+                  onClick={() => setSelectedImage(index)}
                 >
-                  {[1, 2, 3, 4, 5].map(num => (
-                    <option key={num} value={num}>{num}</option>
-                  ))}
-                </select>
+                  <img src={image} alt={`${product.name} - vue ${index + 1}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Informations produit */}
+          <div className="product-info-container fade-in">
+            <span className="product-category">
+              <i className="category-icon">
+                {product.category === 'macrame' ? '🪢' : 
+                 product.category === 'crochet' ? '🧶' : '🎋'}
+              </i>
+              {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+            </span>
+            <h1>{product.name}</h1>
+            <p className="price">{product.price.toFixed(2)} €</p>
+            
+            <div className="product-description">
+              <p>{product.description}</p>
+            </div>
+
+            <div className="materials-section">
+              <h3>Matériaux utilisés</h3>
+              <div className="materials-tags">
+                {product.materials.map((material, index) => (
+                  <span key={index} className="materials-tag">{material}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="making-info">
+              <div className="making-info-item">
+                <span className="label">Temps de création</span>
+                <span className="value">{product.makingTime}</span>
+              </div>
+              <div className="making-info-item">
+                <span className="label">Difficulté</span>
+                <span className="value">{product.difficulty}</span>
+              </div>
+            </div>
+
+            {product.inStock ? (
+              <div className="purchase-section">
+                <div className="quantity-selector">
+                  <label htmlFor="quantity">Quantité</label>
+                  <div className="quantity-controls">
+                    <button 
+                      onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                      className="quantity-btn"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      id="quantity"
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                      min="1"
+                      max="10"
+                    />
+                    <button 
+                      onClick={() => quantity < 10 && setQuantity(quantity + 1)}
+                      className="quantity-btn"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <button onClick={addToCart} className="button button-primary add-to-cart-btn">
+                  Ajouter au panier
+                </button>
+              </div>
+            ) : (
+              <p className="out-of-stock">Produit actuellement indisponible</p>
+            )}
+
+            {/* Informations supplémentaires */}
+            <div className="additional-info">
+              <div className="info-section">
+                <h3>Dimensions</h3>
+                <ul className="specs-list">
+                  <li>Hauteur : {product.dimensions.height}</li>
+                  <li>Largeur : {product.dimensions.width}</li>
+                  <li>Profondeur : {product.dimensions.depth}</li>
+                </ul>
               </div>
 
-              <button 
-                onClick={handleAddToCart}
-                className="btn btn-primary"
-                style={{ width: '100%' }}
-                disabled={addedToCart}
-              >
-                {addedToCart ? 'Ajouté au panier !' : 'Ajouter au panier'}
-              </button>
+              <div className="info-section">
+                <h3>Entretien</h3>
+                <p>{product.care}</p>
+              </div>
 
-              {addedToCart && (
-                <div 
-                  style={{ 
-                    marginTop: '1rem',
-                    padding: '1rem',
-                    background: 'var(--color-green)',
-                    color: 'white',
-                    borderRadius: '4px',
-                    textAlign: 'center'
-                  }}
-                >
-                  Produit ajouté au panier avec succès !
-                </div>
-              )}
-            </div>
-          ) : (
-            <div 
-              style={{ 
-                padding: '1rem',
-                background: 'var(--color-rust)',
-                color: 'white',
-                borderRadius: '4px',
-                textAlign: 'center'
-              }}
-            >
-              Ce produit est actuellement en rupture de stock
-            </div>
-          )}
+              <div className="info-section">
+                <h3>Processus de création</h3>
+                <ol className="creation-process">
+                  {product.creationProcess.map((step, index) => (
+                    <li key={index}>{step}</li>
+                  ))}
+                </ol>
+              </div>
 
-          {/* Informations supplémentaires */}
-          <div style={{ marginTop: '3rem' }}>
-            <div className="card" style={{ padding: '1.5rem' }}>
-              <h3>Informations importantes</h3>
-              <ul style={{ marginTop: '1rem', lineHeight: '1.8' }}>
-                <li>Création artisanale unique faite à la main</li>
-                <li>Délai de fabrication : 3-5 jours ouvrés</li>
-                <li>Livraison soignée avec emballage protégé</li>
-                <li>Entretien facile (instructions fournies)</li>
-              </ul>
+              <div className="info-section">
+                <h3>Livraison</h3>
+                <ul className="shipping-info">
+                  <li>Délai : {product.shipping.time}</li>
+                  <li>Mode : {product.shipping.method}</li>
+                  <li>Frais : {product.shipping.price.toFixed(2)} €</li>
+                </ul>
+              </div>
             </div>
-          </div>
-
-          {/* Personnalisation */}
-          <div style={{ marginTop: '2rem' }}>
-            <p>
-              Vous souhaitez une version personnalisée de ce produit ?{' '}
-              <button 
-                onClick={() => navigate('/custom-order')}
-                className="btn btn-secondary"
-                style={{ marginLeft: '0.5rem' }}
-              >
-                Commander sur mesure
-              </button>
-            </p>
           </div>
         </div>
       </div>

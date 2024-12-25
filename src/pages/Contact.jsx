@@ -7,6 +7,7 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -19,9 +20,10 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ici, vous pourriez ajouter l'envoi à une API
+    // Logique d'envoi du formulaire à implémenter
     console.log('Message envoyé:', formData);
     setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 5000);
     setFormData({
       name: '',
       email: '',
@@ -31,136 +33,164 @@ const Contact = () => {
   };
 
   return (
-    <div className="container section">
-      <div className="text-center" style={{ marginBottom: '3rem' }}>
-        <h1>Contact</h1>
-        <p style={{ maxWidth: '600px', margin: '1rem auto' }}>
-          Une question ? Une suggestion ? N'hésitez pas à me contacter !
-        </p>
-      </div>
-
-      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '4rem', maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Informations de contact */}
-        <div>
-          <h2 style={{ marginBottom: '2rem' }}>Mes Coordonnées</h2>
-          
-          <div style={{ marginBottom: '2rem' }}>
-            <h3>Adresse</h3>
-            <p>La Cabane d'Eva<br />123 Rue des Artisans<br />75001 Paris</p>
-          </div>
-
-          <div style={{ marginBottom: '2rem' }}>
-            <h3>Email</h3>
-            <p>contact@lacabanedeva.fr</p>
-          </div>
-
-          <div style={{ marginBottom: '2rem' }}>
-            <h3>Téléphone</h3>
-            <p>+33 (0)1 23 45 67 89</p>
-          </div>
-
-          <div style={{ marginBottom: '2rem' }}>
-            <h3>Horaires</h3>
-            <p>
-              Lundi - Vendredi : 9h - 18h<br />
-              Samedi : 10h - 16h<br />
-              Dimanche : Fermé
-            </p>
-          </div>
-
-          <div>
-            <h3>Réseaux Sociaux</h3>
-            <div className="social-links" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-              <a href="https://instagram.com/lacabanedeva" target="_blank" rel="noopener noreferrer" className="social-link">
-                Instagram
-              </a>
-              <a href="https://facebook.com/lacabanedeva" target="_blank" rel="noopener noreferrer" className="social-link">
-                Facebook
-              </a>
-              <a href="https://pinterest.com/lacabanedeva" target="_blank" rel="noopener noreferrer" className="social-link">
-                Pinterest
-              </a>
-            </div>
-          </div>
+    <div className="contact-container">
+      <section className="contact-hero">
+        <div className="container">
+          <h1 className="fade-in">Contactez-nous</h1>
+          <p className="contact-subtitle fade-in">
+            Une question, une demande spéciale ? N'hésitez pas à nous écrire
+          </p>
         </div>
+      </section>
 
-        {/* Formulaire de contact */}
-        <div>
-          {submitted ? (
-            <div className="card text-center" style={{ padding: '2rem' }}>
-              <h2>Message Envoyé !</h2>
-              <p>
-                Merci pour votre message. Je vous répondrai dans les plus brefs délais.
+      <div className="container">
+        <div className="contact-grid">
+          {/* Informations de contact */}
+          <div className="contact-info fade-in">
+            <div className="info-card">
+              <h2>Restons en contact</h2>
+              <p className="info-text">
+                Je serai ravie de répondre à vos questions et de discuter de vos projets.
+                N'hésitez pas à me contacter par le moyen qui vous convient le mieux.
               </p>
-              <button 
-                onClick={() => setSubmitted(false)}
-                className="btn btn-primary"
-                style={{ marginTop: '1rem' }}
-              >
-                Envoyer un nouveau message
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="card" style={{ padding: '2rem' }}>
-              <h2 style={{ marginBottom: '2rem' }}>Envoyez-moi un Message</h2>
 
+              <div className="contact-methods">
+                <div className="contact-method">
+                  <i className="contact-icon">📧</i>
+                  <div className="method-content">
+                    <h3>Email</h3>
+                    <p>contact@lacabanedeva.fr</p>
+                    <span className="response-time">Réponse sous 24-48h</span>
+                  </div>
+                </div>
+
+                <div className="contact-method">
+                  <i className="contact-icon">📱</i>
+                  <div className="method-content">
+                    <h3>Téléphone</h3>
+                    <p>+33 6 12 34 56 78</p>
+                    <span className="response-time">Du lundi au vendredi, 9h-18h</span>
+                  </div>
+                </div>
+
+                <div className="contact-method">
+                  <i className="contact-icon">📍</i>
+                  <div className="method-content">
+                    <h3>Atelier</h3>
+                    <p>12 rue des Artisans<br />75011 Paris, France</p>
+                    <span className="response-time">Sur rendez-vous uniquement</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="social-media">
+                <h3>Suivez-nous</h3>
+                <div className="social-links">
+                  <a href="#" className="social-link">
+                    <i className="social-icon">📸</i>
+                    <span>Instagram</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <i className="social-icon">📘</i>
+                    <span>Facebook</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <i className="social-icon">📌</i>
+                    <span>Pinterest</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="faq-card">
+              <h2>Questions fréquentes</h2>
+              <div className="faq-list">
+                <div className="faq-item">
+                  <h3>Délais de fabrication</h3>
+                  <p>Les délais varient selon la complexité de la création, généralement entre 1 et 3 semaines.</p>
+                </div>
+                <div className="faq-item">
+                  <h3>Livraison</h3>
+                  <p>Livraison en France métropolitaine via Colissimo, délai de 2-3 jours ouvrés.</p>
+                </div>
+                <div className="faq-item">
+                  <h3>Retours et échanges</h3>
+                  <p>Possibles sous 14 jours pour les articles non personnalisés.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Formulaire de contact */}
+          <div className="contact-form-container fade-in">
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <h2>Envoyez-nous un message</h2>
+              
               <div className="form-group">
-                <label htmlFor="name" className="form-label">Nom</label>
+                <label htmlFor="name">Nom complet</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="input"
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="email" className="form-label">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="input"
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="subject" className="form-label">Sujet</label>
-                <input
-                  type="text"
+                <label htmlFor="subject">Sujet</label>
+                <select
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="input"
                   required
-                />
+                >
+                  <option value="">Sélectionnez un sujet</option>
+                  <option value="question">Question générale</option>
+                  <option value="custom">Demande sur mesure</option>
+                  <option value="wholesale">Demande professionnelle</option>
+                  <option value="other">Autre</option>
+                </select>
               </div>
 
               <div className="form-group">
-                <label htmlFor="message" className="form-label">Message</label>
+                <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="input"
-                  style={{ minHeight: '150px' }}
                   required
-                />
+                  rows="6"
+                ></textarea>
               </div>
 
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-                Envoyer
+              <button type="submit" className="button button-primary submit-btn">
+                Envoyer le message
               </button>
+
+              {submitted && (
+                <div className="success-message">
+                  <i className="success-icon">✓</i>
+                  <p>Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.</p>
+                </div>
+              )}
             </form>
-          )}
+          </div>
         </div>
       </div>
     </div>
