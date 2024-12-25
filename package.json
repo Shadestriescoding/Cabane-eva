@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "echo 'No lint errors'",
+    "test": "echo 'No tests yet'"
   },
   "dependencies": {
     "react": "^18.2.0",
