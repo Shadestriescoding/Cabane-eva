@@ -6,50 +6,55 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState(searchParams.get('category') || 'all');
-  const [priceRange, setPriceRange] = useState([0, 200]);
-  const [sortBy, setSortBy] = useState('newest');
 
-  // Simulation des données produits (à remplacer par une vraie API)
+  // Simulation des données produits
   useEffect(() => {
     const fetchProducts = () => {
       const productsData = [
         {
           id: 1,
-          name: "Suspension Macramé Bohème",
-          category: "macrame",
-          price: 89.90,
-          image: "/IMG/macrame1.jpg",
-          technique: "Double nœud plat et nœud spirale",
-          difficulty: "★★★☆☆",
-          makingTime: "~4h de création",
+          name: "Suspension Murale en Crochet",
+          category: "crochet",
+          image: "./IMG/suspension_bois_crochet.jpg",
+          technique: "Point relief et point ajouré",
+          difficulty: "★★★★☆",
+          makingTime: "~6h de création",
           materials: ["Coton naturel", "Bois flotté"],
-          description: "Suspension murale en macramé, réalisée à la main avec du coton naturel et du bois flotté. Parfaite pour un style bohème chic."
+          description: "Élégante suspension murale en crochet, associant la douceur du coton à la beauté naturelle du bois flotté. Une pièce unique qui apporte une touche de poésie à votre intérieur."
         },
         {
           id: 2,
-          name: "Mobile Origami Oiseaux",
+          name: "Mobile Origami Poétique",
           category: "origami",
-          price: 45.90,
-          image: "/IMG/origami1.jpg",
-          technique: "Pliage traditionnel Orizuru",
+          image: "./IMG/mobile_origamis.jpg",
+          technique: "Pliage traditionnel",
           difficulty: "★★★★☆",
-          makingTime: "~2h de pliage",
-          materials: ["Papier washi", "Bambou"],
-          description: "Mobile décoratif composé de grues en origami, symboles de paix et de bonheur. Papier washi traditionnel importé du Japon."
+          makingTime: "~3h de pliage",
+          materials: ["Papier washi", "Fil naturel"],
+          description: "Mobile décoratif en origami, créé avec du papier washi traditionnel. Chaque pliage est réalisé avec précision pour créer une composition aérienne et poétique."
         },
         {
           id: 3,
-          name: "Couverture Crochet Automne",
+          name: "Collection Noël en Crochet",
           category: "crochet",
-          price: 129.90,
-          image: "/IMG/crochet1.jpg",
-          technique: "Bride, point écaille",
+          image: "./IMG/deco_sapin_crochet_paindepice.jpg",
+          technique: "Point fantaisie et relief",
           difficulty: "★★★★★",
-          makingTime: "~15h de crochet",
-          materials: ["Laine mérinos", "Mohair"],
-          description: "Couverture douillette réalisée en points fantaisie, mêlant laine mérinos et mohair pour une douceur incomparable."
+          makingTime: "~4h par pièce",
+          materials: ["Laine mérinos", "Coton bio"],
+          description: "Décorations de Noël en crochet, inspirées des traditions hivernales. Chaque pièce est unique et apporte une touche de chaleur et d'authenticité à votre sapin."
         },
-        // Ajoutez plus de produits ici
+        {
+          id: 4,
+          name: "Légumes de Saison au Crochet",
+          category: "crochet",
+          image: "./IMG/legumes_crochet.jpg",
+          technique: "Point serré et relief",
+          difficulty: "★★★☆☆",
+          makingTime: "~3h par légume",
+          materials: ["Coton bio", "Rembourrage naturel"],
+          description: "Collection de légumes au crochet, parfaits pour les jeux d'enfants ou une décoration originale. Réalisés en coton biologique avec un souci du détail."
+        }
       ];
       setProducts(productsData);
       setFilteredProducts(productsData);
@@ -67,35 +72,22 @@ const Shop = () => {
       filtered = filtered.filter(product => product.category === activeCategory);
     }
 
-    // Filtre par prix
-    filtered = filtered.filter(product => 
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-    );
-
-    // Tri
-    switch (sortBy) {
-      case 'price-asc':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'newest':
-        filtered.sort((a, b) => b.id - a.id);
-        break;
-      default:
-        break;
-    }
-
     setFilteredProducts(filtered);
-  }, [activeCategory, priceRange, sortBy, products]);
+  }, [activeCategory, products]);
 
   return (
     <div className="shop-container">
       <section className="shop-hero">
         <div className="container">
-          <h1 className="fade-in">Notre Collection</h1>
-          <p className="shop-subtitle fade-in">Découvrez nos créations artisanales uniques</p>
+          <h1 className="fade-in">Nos Créations</h1>
+          <p className="shop-subtitle fade-in">
+            Découvrez nos créations artisanales uniques et laissez-vous inspirer pour votre projet personnalisé
+          </p>
+          <div className="hero-cta fade-in">
+            <Link to="/commande-personnalisee" className="button button-primary">
+              Créer votre pièce unique
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -133,31 +125,16 @@ const Shop = () => {
               </div>
             </div>
 
-            <div className="filter-section">
-              <h3>Prix</h3>
-              <div className="price-range">
-                <input
-                  type="range"
-                  min="0"
-                  max="200"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                />
-                <span>Jusqu'à {priceRange[1]}€</span>
-              </div>
-            </div>
-
-            <div className="filter-section">
-              <h3>Trier par</h3>
-              <select 
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="sort-select"
-              >
-                <option value="newest">Plus récents</option>
-                <option value="price-asc">Prix croissant</option>
-                <option value="price-desc">Prix décroissant</option>
-              </select>
+            <div className="inspiration-section">
+              <h3>Inspiration</h3>
+              <p>
+                Ces créations sont des exemples de notre savoir-faire. 
+                Chaque pièce peut être personnalisée selon vos envies : dimensions, 
+                couleurs, matériaux... Laissez libre cours à votre imagination !
+              </p>
+              <Link to="/commande-personnalisee" className="button button-secondary">
+                Commander sur mesure
+              </Link>
             </div>
           </aside>
 
@@ -171,7 +148,9 @@ const Shop = () => {
                   <div className="product-image-container zoom-container">
                     <img src={product.image} alt={product.name} className="product-image" />
                     <div className="product-overlay">
-                      <Link to={`/produit/${product.id}`} className="button button-primary">Voir le produit</Link>
+                      <Link to={`/produit/${product.id}`} className="button button-primary">
+                        Voir les détails
+                      </Link>
                     </div>
                     <div className="detail-zoom"></div>
                   </div>
@@ -194,8 +173,10 @@ const Shop = () => {
                         <span key={index} className="materials-tag">{material}</span>
                       ))}
                     </div>
-                    <p className="price">{product.price.toFixed(2)} €</p>
                     <p className="product-details">{product.description}</p>
+                    <Link to="/commande-personnalisee" className="button button-secondary">
+                      Commander une création similaire
+                    </Link>
                   </div>
                 </article>
               ))}

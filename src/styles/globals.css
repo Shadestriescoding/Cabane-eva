@@ -4,9 +4,9 @@
 /* Variables */
 :root {
   /* Nouvelle palette de couleurs */
-  --color-primary: #3f4238ff;    /* black-olive */
+  --color-primary: #b98b73ff;    /* beaver */
   --color-secondary: #6b705cff;  /* reseda-green */
-  --color-accent: #b98b73ff;     /* beaver */
+  --color-accent: #ddbea9ff;     /* desert-sand */
   --color-background: #ffe8d6ff; /* champagne-pink */
   --color-text: #3f4238ff;       /* black-olive */
   --color-light: #ffe8d6ff;      /* champagne-pink */
@@ -19,13 +19,13 @@
   --color-ash-gray: #b7b7a4ff;
   
   /* Variables pour les dégradés */
-  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-buff));
+  --gradient-primary: linear-gradient(135deg, var(--color-buff), var(--color-beaver));
+  --gradient-accent: linear-gradient(135deg, var(--color-desert-sand), var(--color-dun));
   
   /* Conversions RGB pour les opacités */
-  --primary-rgb: 63, 66, 56;
-  --secondary-rgb: 107, 112, 92;
-  --accent-rgb: 185, 139, 115;
+  --primary-rgb: 185, 139, 115;  /* beaver */
+  --secondary-rgb: 107, 112, 92; /* reseda-green */
+  --accent-rgb: 221, 190, 169;   /* desert-sand */
   
   /* Typographie moderne */
   --font-title: 'Cormorant Garamond', serif;
@@ -69,8 +69,8 @@
 /* Base */
 body {
   font-family: var(--font-text);
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--color-champagne-pink);
+  color: var(--color-black-olive);
   line-height: 1.8;
   font-weight: 300;
   letter-spacing: 0.3px;
@@ -78,7 +78,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
-  color: var(--color-primary);
+  color: var(--color-black-olive);
   font-weight: 500;
   letter-spacing: 0.5px;
 }
@@ -161,14 +161,14 @@ a:hover {
 }
 
 .button-primary {
-  background-color: var(--color-primary);
-  color: var(--color-light);
+  background-color: var(--color-beaver);
+  color: var(--color-champagne-pink);
 }
 
 .button-secondary {
   background-color: transparent;
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  color: var(--color-beaver);
+  border: 1px solid var(--color-beaver);
 }
 
 .button:hover {
@@ -181,7 +181,8 @@ a:hover {
 }
 
 .button-secondary:hover {
-  color: var(--color-light);
+  background-color: var(--color-beaver);
+  color: var(--color-champagne-pink);
 }
 
 /* Formulaires */
@@ -243,40 +244,31 @@ a:hover {
 
 /* Styles spécifiques à la page d'accueil */
 .hero {
-  min-height: 90vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background: linear-gradient(
     to right,
-    rgba(44, 24, 16, 0.9),
-    rgba(44, 24, 16, 0.4)
+    rgba(185, 139, 115, 0.9),
+    rgba(185, 139, 115, 0.7)
   );
-  z-index: 1;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-champagne-pink);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 1000px;
-  padding: 0 var(--spacing-md);
+.hero-content h1 {
+  font-family: var(--font-title);
+  font-size: 4.5rem;
+  color: var(--color-champagne-pink);
+  margin-bottom: 1rem;
 }
 
 .hero-subtitle {
   font-family: var(--font-text);
   font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 2px;
-  margin: var(--spacing-md) 0 var(--spacing-lg);
-  opacity: 0.9;
+  color: var(--color-desert-sand);
+  margin-bottom: 2rem;
 }
 
 .hero-buttons {
@@ -620,11 +612,11 @@ a:hover {
 
 /* Styles spécifiques aux produits artisanaux */
 .product-card {
-  background: var(--color-light);
-  border-radius: var(--border-radius-sm);
+  background: var(--color-champagne-pink);
+  border-radius: var(--border-radius-md);
   overflow: hidden;
   position: relative;
-  transition: all 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-image-container {
@@ -687,7 +679,7 @@ a:hover {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-accent);
+  color: var(--color-sage);
   margin-bottom: var(--spacing-xs);
 }
 
@@ -707,7 +699,7 @@ a:hover {
 /* Galerie de produits améliorée */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing-lg);
   padding: var(--spacing-lg) 0;
 }
@@ -717,8 +709,8 @@ a:hover {
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-sm);
-  background: var(--color-light);
-  color: var(--color-primary);
+  background: var(--color-buff);
+  color: var(--color-black-olive);
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius-sm);
   font-size: 0.8rem;
@@ -731,8 +723,8 @@ a:hover {
 /* Étiquette de matériaux */
 .materials-tag {
   display: inline-block;
-  background: var(--color-background);
-  color: var(--color-accent);
+  background: var(--color-desert-sand);
+  color: var(--color-black-olive);
   padding: 0.3rem 0.8rem;
   border-radius: var(--border-radius-sm);
   font-size: 0.8rem;
@@ -807,8 +799,7 @@ a:hover {
 
 /* Macramé */
 .product-card[data-category="macrame"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%238B7355' stroke-width='1' fill='none' opacity='0.3'/%3E%3C/svg%3E");
-  background-size: 20px 20px;
+  background-color: var(--color-buff);
 }
 
 .product-card[data-category="macrame"] .product-category {
@@ -826,8 +817,7 @@ a:hover {
 
 /* Crochet */
 .product-card[data-category="crochet"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='2' fill='%23D4B08C' opacity='0.3'/%3E%3C/svg%3E");
-  background-size: 15px 15px;
+  background-color: var(--color-desert-sand);
 }
 
 .product-card[data-category="crochet"] .product-category {
@@ -845,8 +835,7 @@ a:hover {
 
 /* Origami */
 .product-card[data-category="origami"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l20 20L40 0M0 40l20-20L40 40' stroke='%232C1810' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E");
-  background-size: 20px 20px;
+  background-color: var(--color-ash-gray);
 }
 
 .product-card[data-category="origami"] .product-category {
@@ -976,16 +965,15 @@ a:hover {
 }
 
 .shop-hero {
-  background: linear-gradient(rgba(44, 24, 16, 0.8), rgba(44, 24, 16, 0.6)),
-              url('/images/shop-hero.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(185, 139, 115, 0.9), rgba(185, 139, 115, 0.6));
   padding: var(--spacing-xl) 0;
-  color: var(--color-light);
+  color: var(--color-champagne-pink);
   text-align: center;
   margin-bottom: var(--spacing-xl);
 }
 
 .shop-hero h1 {
-  color: var(--color-light);
+  color: var(--color-champagne-pink);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -1005,13 +993,9 @@ a:hover {
 
 /* Filtres */
 .shop-filters {
-  background: var(--color-light);
+  background: var(--color-desert-sand);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-sm);
-  height: fit-content;
-  position: sticky;
-  top: var(--spacing-lg);
 }
 
 .filter-section {
@@ -1035,13 +1019,13 @@ a:hover {
 }
 
 .filter-btn {
-  background: none;
-  border: 1px solid var(--color-accent);
+  background: var(--color-champagne-pink);
+  color: var(--color-black-olive);
+  border: 1px solid var(--color-buff);
   padding: 0.8rem 1.2rem;
   border-radius: var(--border-radius-sm);
   font-family: var(--font-text);
   font-size: 0.9rem;
-  color: var(--color-text);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -1051,9 +1035,9 @@ a:hover {
 }
 
 .filter-btn.active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-light);
+  background: var(--color-beaver);
+  color: var(--color-champagne-pink);
+  border-color: var(--color-beaver);
 }
 
 .price-range {
@@ -2224,3 +2208,374 @@ a:hover {
     padding: 3rem 0;
   }
 } 
+
+/* Styles pour la section inspiration */
+.inspiration-section {
+  background: var(--color-desert-sand);
+  border: 1px solid var(--color-buff);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  margin-top: var(--spacing-lg);
+}
+
+.inspiration-section p {
+  color: var(--color-black-olive);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+/* Styles pour la section personnalisation */
+.customization-section {
+  background: var(--color-champagne-pink);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.customization-options {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0;
+}
+
+.customization-options li {
+  position: relative;
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-black-olive);
+}
+
+.customization-options li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-beaver);
+}
+
+.custom-order-btn {
+  width: 100%;
+  margin-top: var(--spacing-md);
+}
+
+/* Mise à jour des couleurs existantes */
+.button-primary {
+  background-color: var(--color-beaver);
+  color: var(--color-champagne-pink);
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-beaver);
+  border: 1px solid var(--color-beaver);
+}
+
+.button-secondary:hover {
+  background-color: var(--color-beaver);
+  color: var(--color-champagne-pink);
+}
+
+.product-category {
+  color: var(--color-beaver);
+}
+
+.materials-tag {
+  background-color: var(--color-desert-sand);
+  color: var(--color-black-olive);
+}
+
+.handmade-badge {
+  background-color: var(--color-buff);
+  color: var(--color-black-olive);
+}
+
+.hero-cta {
+  margin-top: var(--spacing-lg);
+}
+
+/* Mise à jour des styles de la grille de produits */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.product-card {
+  background: var(--color-champagne-pink);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(185, 139, 115, 0.2);
+}
+
+/* Mise à jour des styles du formulaire */
+.filter-btn {
+  background: var(--color-champagne-pink);
+  color: var(--color-black-olive);
+  border: 1px solid var(--color-buff);
+}
+
+.filter-btn.active {
+  background: var(--color-beaver);
+  color: var(--color-champagne-pink);
+  border-color: var(--color-beaver);
+}
+
+/* Styles spécifiques par catégorie */
+.product-card[data-category="macrame"]::before {
+  background-color: var(--color-buff);
+}
+
+.product-card[data-category="crochet"]::before {
+  background-color: var(--color-desert-sand);
+}
+
+.product-card[data-category="origami"]::before {
+  background-color: var(--color-ash-gray);
+}
+
+/* Navigation */
+.navbar {
+  background-color: var(--color-beaver);
+  padding: 1.5rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(185, 139, 115, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav-logo {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--color-champagne-pink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: var(--font-title);
+  color: var(--color-champagne-pink);
+  text-decoration: none;
+  font-size: 1.1rem;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-desert-sand);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Hero section */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(
+    to right,
+    rgba(185, 139, 115, 0.95),
+    rgba(185, 139, 115, 0.8)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px; /* Pour compenser la navbar fixed */
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: 5rem;
+  color: var(--color-champagne-pink);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  font-family: var(--font-text);
+  font-size: 1.4rem;
+  color: var(--color-desert-sand);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Boutons améliorés */
+.button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.6s ease;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button-primary {
+  background-color: var(--color-beaver);
+  color: var(--color-champagne-pink);
+  border: none;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-champagne-pink);
+  border: 2px solid var(--color-champagne-pink);
+}
+
+/* Cartes produits améliorées */
+.product-card {
+  background: var(--color-champagne-pink);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.product-image-container {
+  position: relative;
+  padding-top: 125%;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(185, 139, 115, 0.8)
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(185, 139, 115, 0.2);
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+/* Badges et étiquettes raffinés */
+.handmade-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--color-buff);
+  color: var(--color-champagne-pink);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  z-index: 2;
+}
+
+.materials-tag {
+  display: inline-block;
+  background: var(--color-desert-sand);
+  color: var(--color-black-olive);
+  padding: 0.4rem 0.8rem;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  margin: 0.25rem;
+}
+
+/* Sections avec fond texturé */
+.section-texture {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23b98b73' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+}

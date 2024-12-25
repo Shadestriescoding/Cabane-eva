@@ -1,50 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-  const { cart } = useCart();
-  const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const location = useLocation();
 
   return (
     <nav className="navbar">
-      <div className="container navbar-container">
+      <div className="nav-container">
         <Link to="/" className="nav-logo">
           La Cabane d'Eva
         </Link>
-        
-        <ul className="nav-links">
-          <li>
-            <Link to="/" className="nav-link">
-              Accueil
-            </Link>
-          </li>
-          <li>
-            <Link to="/shop" className="nav-link">
-              Boutique
-            </Link>
-          </li>
-          <li>
-            <Link to="/custom" className="nav-link">
-              Sur Mesure
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="nav-link">
-              À Propos
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className="nav-link">
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link to="/cart" className="nav-link">
-              Panier ({cartItemsCount})
-            </Link>
-          </li>
-        </ul>
+        <div className="nav-links">
+          <Link 
+            to="/" 
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+          >
+            Accueil
+          </Link>
+          <Link 
+            to="/boutique" 
+            className={`nav-link ${location.pathname === '/boutique' ? 'active' : ''}`}
+          >
+            Créations
+          </Link>
+          <Link 
+            to="/commande-personnalisee" 
+            className={`nav-link ${location.pathname === '/commande-personnalisee' ? 'active' : ''}`}
+          >
+            Sur Mesure
+          </Link>
+          <Link 
+            to="/a-propos" 
+            className={`nav-link ${location.pathname === '/a-propos' ? 'active' : ''}`}
+          >
+            À Propos
+          </Link>
+          <Link 
+            to="/contact" 
+            className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+          >
+            Contact
+          </Link>
+        </div>
       </div>
     </nav>
   );

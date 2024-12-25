@@ -5,7 +5,6 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
 
   // Simulation de récupération des données produit
   useEffect(() => {
@@ -13,38 +12,37 @@ const ProductDetail = () => {
       // Simuler une requête API
       const productData = {
         id: parseInt(id),
-        name: "Suspension Macramé Bohème",
-        category: "macrame",
-        price: 89.90,
+        name: "Suspension Murale en Crochet",
+        category: "crochet",
         images: [
-          "/IMG/macrame1.jpg",
-          "/IMG/macrame2.jpg",
-          "/IMG/macrame3.jpg",
-          "/IMG/macrame4.jpg"
+          "./IMG/suspension_bois_crochet.jpg",
+          "./IMG/suspension_bois_crochet_2.jpg",
+          "./IMG/deco_sapin_crochet.jpg",
+          "./IMG/ensemble_patisserie_crochet.jpg"
         ],
-        technique: "Double nœud plat et nœud spirale",
-        difficulty: "★★★☆☆",
-        makingTime: "~4h de création",
+        technique: "Point relief et point ajouré",
+        difficulty: "★★★★☆",
+        makingTime: "~6h de création",
         materials: ["Coton naturel", "Bois flotté"],
-        description: "Suspension murale en macramé, réalisée à la main avec du coton naturel et du bois flotté. Parfaite pour un style bohème chic.",
+        description: "Élégante suspension murale en crochet, associant la douceur du coton à la beauté naturelle du bois flotté. Une pièce unique qui apporte une touche de poésie à votre intérieur.",
         dimensions: {
-          height: "80 cm",
-          width: "60 cm",
-          depth: "5 cm"
+          height: "60 cm",
+          width: "40 cm",
+          depth: "3 cm"
         },
         care: "Dépoussiérer délicatement. Éviter l'exposition directe au soleil.",
-        inStock: true,
         creationProcess: [
-          "Sélection et préparation des matériaux",
-          "Création de la structure de base",
-          "Réalisation des nœuds décoratifs",
-          "Finitions et contrôle qualité"
+          "Sélection des matériaux naturels",
+          "Crochet de la partie textile",
+          "Assemblage avec le support en bois",
+          "Finitions soignées"
         ],
-        shipping: {
-          time: "2-3 jours ouvrés",
-          method: "Colissimo avec suivi",
-          price: 6.90
-        }
+        customization: [
+          "Choix des dimensions",
+          "Sélection des couleurs",
+          "Type de support en bois",
+          "Motifs personnalisés"
+        ]
       };
       setProduct(productData);
       setSelectedImage(0);
@@ -61,18 +59,6 @@ const ProductDetail = () => {
     );
   }
 
-  const handleQuantityChange = (e) => {
-    const value = parseInt(e.target.value);
-    if (value > 0 && value <= 10) {
-      setQuantity(value);
-    }
-  };
-
-  const addToCart = () => {
-    // Logique d'ajout au panier à implémenter
-    console.log(`Ajout de ${quantity} ${product.name} au panier`);
-  };
-
   return (
     <div className="product-detail-container">
       <div className="container">
@@ -80,7 +66,7 @@ const ProductDetail = () => {
         <nav className="breadcrumb fade-in">
           <Link to="/">Accueil</Link>
           <span className="separator">/</span>
-          <Link to="/boutique">Boutique</Link>
+          <Link to="/boutique">Créations</Link>
           <span className="separator">/</span>
           <span className="current">{product.name}</span>
         </nav>
@@ -119,7 +105,6 @@ const ProductDetail = () => {
               {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
             </span>
             <h1>{product.name}</h1>
-            <p className="price">{product.price.toFixed(2)} €</p>
             
             <div className="product-description">
               <p>{product.description}</p>
@@ -145,45 +130,22 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {product.inStock ? (
-              <div className="purchase-section">
-                <div className="quantity-selector">
-                  <label htmlFor="quantity">Quantité</label>
-                  <div className="quantity-controls">
-                    <button 
-                      onClick={() => quantity > 1 && setQuantity(quantity - 1)}
-                      className="quantity-btn"
-                    >
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      id="quantity"
-                      value={quantity}
-                      onChange={handleQuantityChange}
-                      min="1"
-                      max="10"
-                    />
-                    <button 
-                      onClick={() => quantity < 10 && setQuantity(quantity + 1)}
-                      className="quantity-btn"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <button onClick={addToCart} className="button button-primary add-to-cart-btn">
-                  Ajouter au panier
-                </button>
-              </div>
-            ) : (
-              <p className="out-of-stock">Produit actuellement indisponible</p>
-            )}
+            <div className="customization-section">
+              <h3>Personnalisation possible</h3>
+              <ul className="customization-options">
+                {product.customization.map((option, index) => (
+                  <li key={index}>{option}</li>
+                ))}
+              </ul>
+              <Link to="/commande-personnalisee" className="button button-primary custom-order-btn">
+                Commander une création similaire
+              </Link>
+            </div>
 
             {/* Informations supplémentaires */}
             <div className="additional-info">
               <div className="info-section">
-                <h3>Dimensions</h3>
+                <h3>Dimensions de l'exemple</h3>
                 <ul className="specs-list">
                   <li>Hauteur : {product.dimensions.height}</li>
                   <li>Largeur : {product.dimensions.width}</li>
@@ -203,15 +165,6 @@ const ProductDetail = () => {
                     <li key={index}>{step}</li>
                   ))}
                 </ol>
-              </div>
-
-              <div className="info-section">
-                <h3>Livraison</h3>
-                <ul className="shipping-info">
-                  <li>Délai : {product.shipping.time}</li>
-                  <li>Mode : {product.shipping.method}</li>
-                  <li>Frais : {product.shipping.price.toFixed(2)} €</li>
-                </ul>
               </div>
             </div>
           </div>
